@@ -18,11 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/register', [LoginController::class, 'register']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
-
-    Route::post('/login', [LoginController::class, 'authenticate']);
-    Route::get('/register', [LoginController::class, 'register']);
     Route::post('/register', [LoginController::class, 'registerProcess']);
     Route::post('/transaksi/hitung', [TransaksiController::class, 'hitung']);
     Route::resource('transaksi', TransaksiController::class);
